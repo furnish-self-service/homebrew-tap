@@ -17,6 +17,7 @@ cask "furnish" do
   end
 
   depends_on arch: :arm64
+  depends_on :macos
 
   app "furnish.app"
   binary "#{appdir}/furnish.app/Contents/MacOS/furnish"

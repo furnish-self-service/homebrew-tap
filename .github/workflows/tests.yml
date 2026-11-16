@@ -21,6 +21,7 @@ jobs:
         run: |
           tap="$(brew --repository)/Library/Taps/furnish-self-service/homebrew-tap"
           mkdir -p "$(dirname "$tap")" && rm -rf "$tap" && ln -s "$GITHUB_WORKSPACE" "$tap"
+          brew trust furnish-self-service/tap
       - run: brew style furnish-self-service/tap
       - run: brew audit --cask --strict --online furnish-self-service/tap/furnish
       - run: brew install --cask furnish-self-service/tap/furnish
