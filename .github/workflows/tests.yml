@@ -1,0 +1,30 @@
+name: tests
+
+# furnish's CI updates the cask after each alpha build; this checks what it pushed.
+on:
+  push:
+    branches: [main]
+    paths: [Casks/**, audit_exceptions/**]
+  pull_request:
+  workflow_dispatch:
+
+env:
+  HOMEBREW_NO_AUTO_UPDATE: 1
+  HOMEBREW_NO_INSTALL_FROM_API: 1
+
+jobs:
+  cask:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use this checkout as the tap
+        run: |
+          tap="$(brew --repository)/Library/Taps/furnish-self-service/homebrew-tap"
+          mkdir -p "$(dirname "$tap")" && rm -rf "$tap" && ln -s "$GITHUB_WORKSPACE" "$tap"
+      - run: brew style furnish-self-service/tap
+      - run: brew audit --cask --strict --online furnish-self-service/tap/furnish
+      - run: brew install --cask furnish-self-service/tap/furnish
+      - run: |
+          test -d /Applications/furnish.app
+          furnish --version
+      - run: brew uninstall --cask furnish-self-service/tap/furnish
