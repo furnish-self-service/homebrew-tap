@@ -1,6 +1,6 @@
 cask "furnish" do
-  version "0.1.0-alpha.288"
-  sha256 "5ddbb91dfe243b7421b10fa653998c66432e507f7f28c578ef305dc0ccc9aea0"
+  version "0.1.0-alpha.290"
+  sha256 "b81c60f354269c3111174ad46012775477ed665bb14252f0006f7ca14eaf1905"
 
   url "https://github.com/furnish-self-service/furnish/releases/download/v#{version}/furnish_#{version}_arm64.dmg"
   name "furnish"
