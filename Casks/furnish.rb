@@ -1,20 +1,11 @@
 cask "furnish" do
-  version "0.1.0-alpha.432"
-  sha256 "2651815a995c48d9ae9aff595c5adc994685c4c3de7c4d77d05f66aacd4bb129"
+  version "0.1.0"
+  sha256 "1dc21f59264265b52ecc5bbe0e7c2f5f3b0809d661dfcbfcb0425a755a963aeb"
 
   url "https://github.com/furnish-self-service/furnish/releases/download/v#{version}/furnish_#{version}_arm64.dmg"
   name "furnish"
   desc "Self-service app catalog for an organization's computers"
   homepage "https://furnish-self-service.github.io/"
-
-  # Alpha builds are GitHub pre-releases, which the default strategy skips.
-  livecheck do
-    url :url
-    regex(/^v?(\d+(?:\.\d+)+-alpha\.\d+)$/i)
-    strategy :github_releases do |json, regex|
-      json.map { |release| release["tag_name"]&.[](regex, 1) }
-    end
-  end
 
   depends_on arch: :arm64
   depends_on :macos
